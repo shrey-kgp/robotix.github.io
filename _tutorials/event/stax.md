@@ -1,38 +1,38 @@
 ---
 layout: post
-title: "Stax Tutorial"
+title: "Cubiscan Tutorial"
 categories:
  - event
 image: img/tutorial/event/stax/image_7.png
 ---
 #### Problem Statement
 
-To build a robot which can rearrange blocks of different colours from a stack in a pattern by identifying the colours simultaneously moving across the stacks using line following.
-
+To Build a robot capable of detecting the dimensions of the block to estimate the volume of the block and then indicate the increasing order of volume of blocks.
 #### USP
 
 * Autonomous Traversal (Line Following)
 
-* Colour Identification
+* Dual axis sensor traversal 
 
-* Sorting Algorithm
+* Estimation of object dimensions
 
 #### Components List
 
-| Materials                                   | Quantity |
-|--------------------------------------------------- |---|
-|Arduino Uno                                         | 1 |
-|Motor Driver IC L293D                               | 2 |
-|Chassis with gripper                                | 1 |
-|Color sensor module TCS3200                         | 1 |
-|Pair of /IR Sensor Array                            | 1 |
-|DC Motors                                           | 2 |
-|Wheels                                              | 2 |
-|Castor Wheel                                        | 1 |
-|Jumper wires                              | As required |
-|Bread Board                                         | 1 |
-|Power supply for Arduino-5V                         | 1 |
-|Power supply for Motor-as specified  &nbsp; &nbsp;  | 1 |
+| Materials											         | Quantity |
+|-------------------------------------------------------------------|---:|
+|Arduino Mega 												        | 1 |
+|L293D Motor driver 									            | 1 |
+|5V stepper motor with motor-driver board (ULN2003)		            | 2 |
+|Rack and pinion                                                    | 2 |
+|Chassis                                                            | 1 |
+|IR sensor module                                                   | 2 |
+|IR sensor Array                                                    | 1 |
+|DC Motors                                                          | 2 |
+|Wheels                                                             | 2 |
+|Castor Wheel                                                       | 1 |
+|Jumper Wires                                            | As required  |
+|Breadboard                                                         | 1 |
+|9-12V power supply                                                 | 1 |
 
 #### Line Following
 
@@ -70,14 +70,46 @@ For better accuracy we can use multiple IR LED pairs in an IR sensor array.
 ![](/img/tutorial/event/stax/image_4.jpg){:.img-responsive}
 
 
-#### Colour Detection
+#### Scanning
 
-A colour detection module senses the colour of the object in front of it. The module has four LEDs. Light from these diodes gets reflected by the object to reach the colour sensor TCS230. It provides the information about the colour by splitting it into the three primary components red, green and blue. The sensor has ability of high resolution conversion of light to frequency.
+##### Dual axis scanning (rack and pinion)
 
-Refer to the [colour detection tutorial]({{ site.baseurl }}/tutorial/auto/Color_Detection/) for more details.
+To scan the block, the IR sensor needs to be moved along two axes. Alternatively, two IR sensors can be used and both the axis would be independent. To get the linear motion of the sensor, we use a Rack and pinion mechanism. This mechanism is used to convert rotational motion into translatory motion. By attaching a stepper motor to the pinion, we can get the translatory motion of the rack. To this rack, the IR sensor (to be used for scanning) will be attached.
 
-#### Sorting Algorithm
-
-Sample case of a possible sorting algorithm is given below.
 
 ![](/img/tutorial/event/stax/image_5.png){:.img-responsive}
+
+##### Stepper Motor
+
+A stepper motor is a brushless DC electric motor that divides a full rotation into a number of equal steps. The motor's position can then be controlled to move and hold at one of these steps without any position sensor for feedback, as long as the motor is carefully sized to the application in respect to torque and speed. <br>
+The detailed tutorial can be found here.
+
+##### IR Sensor
+
+One IR sensor each will be attached to both the racks (one for horizontal scanning and one for vertical scanning). The Blocks will be white in colour so the IR sensors can be used to scan the blocks. The IR sensor will sense white when the block is in front of it and it will sense black when the block is not in front of it. By counting the no. of steps taken by the stepper motor while the IR sensor is sensing white colour, the dimensions of the block can be determined.
+
+
+#### **Pseudo Code**
+
+Vertical Scanning 
+{% highlight cpp %}
+while(block exists)
+{
+	Move sensor up and count;
+}
+Use the value of count as measure of height;
+{% endhighlight %}
+
+
+Horizontal Scanning
+{% highlight cpp %}
+if (block edge detected for 1st time)
+{
+	Move sensor horizontally and start counting;
+}
+if (block edge detected 2nd time)
+{
+	End counting and use this count as a measure of width; 
+}
+{% endhighlight %}
+

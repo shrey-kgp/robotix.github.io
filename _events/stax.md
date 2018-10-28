@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 'Stax'
+title: 'Cubiscan'
 subTitle: 'Autonomous Event'
 logo: /img/event/stax/logo.png
 actions:
@@ -44,29 +44,29 @@ actions:
 
 #### Introduction
 
-Consider the situation of a factory where heavy machine parts are kept in a random manner and need to be kept correctly for assembling. An autonomous robot will not only make the job easy but also optimize the number of movements.
+The labyrinth to the National Treasure ain’t easy, and definitely beyond our scope because it’s entrapped in debris. Furthermore, the gate to the treasure is opened only by knowing the correct volume of blocks of specific physical characteristics, which perhaps shows skilled ancient architecture. We need to build up a bot on which this engulfing task can be assigned.
 
 #### USP
 
-* Autonomous Traversal (Line Following)
+* Detecting dimensions of objects (Height & Width)
 
-* Colour Identification
+* Line following
 
-* Sorting Algorithm
+* Dual axis traversal of sensor(s)
 
 #### Problem Statement
 
-To build a robot which can **rearrange** blocks of different colours from a stack in a pattern by **identifying the colours** simultaneously moving across the stacks using **line following**.
+To Build a robot capable of detecting the dimensions of the block to estimate the volume of the block and then indicate the increasing order of volume of blocks.
 
 #### General Description and Event Setup
 
-* There will be cubical blocks of **six** different colours including **two** waste blocks of black and white colour each.
+* There will be blocks in the arena each of different height and width.The depth will also vary for the 2nd round. The bot has to measure the height and width of each blocks.(depth as well for 2nd round).
 
-* The robot has to identify the desired sequence of the block by means of colour detection, while traversing across the arena using line following traversal algorithm.
+* A finish zone will be present in the centre of the arena where the bot has to reach at the end and show the increasing order of volume of the blocks by blinking LEDs present on the bot.
 
-* The robot will then pick a block from the main stack and identify its colour.
 
-* The robot has to use the side stacks for the intermediate steps involved, in order to achieve a particular sequence that it detected initially from the indicator blocks.
+
+
 
 #### Arena
 
@@ -75,19 +75,18 @@ To build a robot which can **rearrange** blocks of different colours from a stac
 
 ##### Arena specifications
 
-* The outer dimensions of the arena will be **200 cm x 200 cm**.
+* The outer dimensions of the arena will be 200 x 200 cm.
 
-* The main stack and side stacks will be a rectangles of inner dimensions **60 cm x 20 cm** and **40 cm x 20 cm** with a width of **10 cm** on all sides.
+* There will be a square at the centre.
 
-* The line width for facilitating line following mechanism will be **5 cm**.
 
-* The distance between line edge and the color indicators providing sequence information wll be **12 cm**.
+* The width of the lines will be 3cm.
 
-* The indicator block will have a face of dimensions **10 cm x 10 cm**.
 
-* Horizontal lines of dimension **15 cm x 3 cm** provided inside the stacks with gap of **7 cm** will act as a marker to stop if required and pick/place the block.
+* Dimensions of the arena are to be considered with a maximum tolerance of 10%.
 
-* Dimensions of the arena are to be considered with a maximum tolerance of **10%**.
+
+
 
 ![](/img/event/stax/image_4.jpg){:.img-responsive}
 
@@ -100,11 +99,15 @@ To build a robot which can **rearrange** blocks of different colours from a stac
 ![](/img/event/stax/image_5.jpg){:.img-responsive}
 ##### Block Specifications
 
-**Cubical:**  6cm X 6cm X 6cm.
+* For the 1st round, depth of the blocks will be fixed to 10 cm, whereas the height and width will be variable.
 
-**Weight:** The weight of the blocks will be somewhere between **60 to 80 grams**.
+* The dimensions of the blocks may vary from 4cm to 10cm.
 
-**Handle:** A handle will be made on top of each block to facilitate lifting as shown in the figure. A free space of **1.5 cm x 6 cm** will be provided inside each handle.
+* For the 2nd round,height, width and depth of the blocks will vary.
+
+* The weight of the block will be around 100 gms.
+
+
 
 ![](/img/event/stax/image_8.png){:.img-responsive}
 
@@ -116,23 +119,20 @@ To build a robot which can **rearrange** blocks of different colours from a stac
 
 ##### Robot Specification
 
-* The robot must fit in a box of **30cm x 30cm x 30cm** with a tolerance of **10%** in the dimensions of robot.
+* The robot must fit in a box of **25cm x 25cm x 25cm** with a tolerance of 10% in the dimensions of robot.
 
-* No part/mechanism of/on the robot should exceed the given dimensions before the commencement of the event. However, the dimensions may change during the course of the run.
+
+* No part/mechanism of/on the bot should exceed the given dimensions before the commencement of the event. However the dimensions can change during the course of the run.
+
 
 ##### Event Rules
 
 * The robot should traverse the arena only by using the **line following mechanism**.
 
-* The robot should detect the desired sequence of the blocks as well as the order of the blocks arranged initially, by using colour detection.
+* Points will be awarded for correct **scanning the dimensions of blocks** during the run and **indication of the correct order of the blocks** of the blocks at the end of the run. 
 
-* The robot need not show the detected/desired sequence but it should show **exclusive identification** for block of each color detected. Eg. using different LEDs for different blocks.
+* Participants are **not** allowed to **touch** the blocks while scanning them.  Negative points will be awarded for touching or displacing the block.
 
-* Points will be awarded for correct **identification** and **deposition** of the blocks at the end of the run. **Correct identification:** Whether the colour of block detected is correct. **Deposited Objects:** Blocks deposited must be in the correct sequence.
-
-* Participants are **not** allowed to **drag** the blocks while moving them. They must be lifted from ground level, clearly. Any call of Team ROBOTIX will be final and binding.
-
-* While **picking** and **placing** any block the robot should not make contact with any other unsegregated blocks kept in the arena. There will be a penalty for each contact. However, you can slightly displace a block while trying to pick it.
 
 ##### Restarts and Timeouts
 
@@ -152,129 +152,81 @@ To build a robot which can **rearrange** blocks of different colours from a stac
 
 ##### Task
 
-* There will be a total of **3 blocks** in **random** order.
+* There will be four blocks.
 
-* The participant will be **allowed to input the initial order of blocks** in their robot, before the run starts.
+* The bot has to traverse through the centre loop and go near each block.
 
-* The robot has to **identify** the desired sequence of the blocks from the colour indicators placed on each turn before approaching the main stack.
+* The bot has to estimate the height and width of the block.
 
-* The first indicator will show the colour of the **innermost block** and sequentially the other indicators will show the colour of further blocks.
+* Thus by measuring the height and width, the approximate volume of the blocks will be calculated.
 
-* The robot has to pick and place the blocks one at a time to **rearrange** the blocks in the main stack with the help of side stacks.
+* Now the bot has to go to the central node of the arena and then blink the LEDs in the order of increasing volume. 
 
-* The robot has to **return** to the node in front of the main stack and **indicate the completion of the task**.
 
-**Note:** The data input (initial sequence of blocks in main stack) to the robot in the first round will be allowed by means of either wireless communication or by changing the parameters in the code burnt on the microcontroller. There are no extra points awarded or deducted for this choice.
 
-##### Round rules
 
-* A maximum of **6 minutes** will be given to complete this round. The restart can only be taken before **4 minutes** into the round.
 
-* Maximum number of Time-outs allowed: **2** (1 min each).
 
-* Maximum number of Restarts allowed: **2**.
 
-**NOTE:** Restarts will be given only for technical fault in the robot.
+**EXAMPLE:**For example, the dimensions of the blocks are as follows- <br>
+1st block : 5\*5\*10 , Volume = 250 <br>
+2nd block : 10\*8\*8, Volume = 640 <br>
+3rd block : 9\*9\*12, Volume = 972 <br>
+4th block : 7\*7\*7, Volume = 343 <br>
+Thus the correct order of increasing volume would be 1<4<2<3
 
-##### Scoring Formula
 
-* **Positives**
 
-    * Base score: **1000**
-
-    * For each block picked/gripped (given once for each block): **100** (Q)
-
-    * Successful identification of colour: **150** (P)
-
-    * Each correct deposition of non-waste block: **500** (U)
-
-    * Completion of Job and coming back to centre node: **150** (R)
-
-    * Time factor: **2**(T in seconds)
-
-* **Negatives**
-
-    * Incorrect identification of colour: **50** (A)
-
-    * Each incorrect deposition of non-waste block: **100** (V)
-
-    * Dropping the picked block each time: **75** (L)
-
-    * For each timeout: **100** (O)
-
-    * For each restart: **150** (S)
-
-**Formula:**
-
-{% highlight ruby %}
-1000 + 100*Q + 500*U + 150*(P + R) + 2*T - 75*L - 50*A - 100*(O + V) - 150*S
-{% endhighlight %}
 
 #### Round 2
 
 ##### Task
 
-* There will be a total of **6 blocks** in **random** order out of which **2 blocks** will be **waste blocks** of colour **white** and **black**.
+* There will be four blocks.
 
-* The participant will **NOT be allowed to input the initial order of blocks** in their robot.
 
-* The robot has to **identify** the desired sequence of the blocks from the colour indicators placed on each turn before approaching the main stack.
+* All the three dimensions of the block will be variable.
 
-* The first indicator will show the colour of the **innermost block** and sequentially the other indicators will show the colour of further blocks in order.
+* Each of the blocks can be accessed from two nodes.
 
-* The robot has to **detect** the colour of the blocks in the main stack, as the **initial sequence** of the blocks becomes accesible to the robot.
 
-* The robot has to pick up and place the blocks, one at a time to **rearrange** them in the main stack with help of side stacks.
+* Thus, the bot has to scan the block from each of the nodes and thus estimate its volume.
 
-* The robot has to **dispose** the **waste blocks** into the **side stacks** meanwhile arranging the required blocks in the main stack.
+* After calculating the approximate volume, the bot has to go to the central node and blink the LEDs in the order of increasing volume.
 
-* The robot has to **return** to the node in front of the main stack and **indicate the completion of the task**.
-
-##### Round rules
-
-* A maximum of **10 minutes** will be given to complete this round. The restart will only be given before **7 minutes** into the round.
-
-* Maximum number of Time-outs allowed: **2 (1 min each).**
-
-* Restarts allowed: **2**
-
-**NOTE:** Restarts will be given only for technical fault in the robot.
 
 ##### Scoring Formula
 
 * **Positives**
 
-    * Base score: **1000**
+    * Base score: **200**
 
-    * For each block picked/gripped (given once for each block): **100** (Q)
+    * Reaching each node to scan the block : **50** (Q)
 
-    * Successful identification of colour: **150** (P)
+    * Scanning each block : **50** (100 points will be awarded for scanning from both sides in round 2) (P)
 
-    * Each correct deposition of non-waste block: **500** (U)
+    * Completing all scanning and reaching centre node : **150** (R)
 
-    * Completion of Job and coming back to centre node: **150** (R)
+    * Correctly indication of order : 200 (for each block) (T)
 
-    * Time factor: **2**(T in seconds)
+    
 
 * **Negatives**
 
-    * Incorrect identification of colour: **50** (A)
+    * Displacing or touching the block : **100** (A)
 
-    * Each incorrect deposition of non-waste block: **100** (V)
+    * Incorrect indication of order : **100** (for each block) (V)
 
-    * Dropping the picked block each time: **75** (L)
+    * For each timeout: **100** (L) 
 
-    * For each timeout: **100** (O)
-
-    * For each restart: **150** (S)
-
-    * Leaving a waste block in main stack: **150**(D)
+    * For each restart: **150** (O)
 
 **Formula:**
 
 {% highlight ruby %}
-1000 + 100*Q + 500*U + 150*(P + R) + 2*T - 75*L - 50 *A - 100*(O + V) - 150*(S + D)
+1000 + 100*Q + 500*U + 150*(P + R) + 2*T - 75*L - 50*A - 100*(V) - 150*O
 {% endhighlight %}
+
 ##### General Rules
 
 * Maximum number of participants allowed per team: **4 people**.
@@ -287,9 +239,9 @@ To build a robot which can **rearrange** blocks of different colours from a stac
 
 * Teams cannot tinker with their robots during the run.
 
-* Deposition of block will be considered only if the block is placed correctly within two horizontal lines.
 
-* An incorrect deposition is not to be confused as dropping of the block.
+
+
 
 * [LEGO kits](http://en.wikipedia.org/wiki/Lego_Mindstorms) or its spare parts are not allowed.
 
@@ -305,20 +257,16 @@ For relevant tutorials check [ROBOTIX TUTORIALS](https://www.robotix.in/tutorial
 
 ##### Contact
 
-###### Vivek Mudgal
+###### Rohit Ner
 
-Email: **[vivek.mudgal@robotix.in](mailto:vivek.mudgal@robotix.in)**
+Email: **[rohit.ner@robotix.in](mailto:rohit.ner@robotix.in)**
 
-Ph. no: **+91 7407777007**
+Ph. no: **+91 7479322111**
 
-###### Shivang Agrawal
+###### Aditi Singh
 
-Email: **[shivang.agrawal@robotix.in](mailto:shivang.agrawal@robotix.in)**
+Email: **[aditi.singh@robotix.in](mailto:aditi.singh@robotix.in)**
 
-Ph. no: **+91 9455538734**
+Ph. no: **+91 7478085999**
 
-###### Aman Chandra
 
-Email: **[aman.chandra@robotix.in](mailto:aman.chandra@robotix.in)**
-
-Ph. no: **+91 8967126457**
