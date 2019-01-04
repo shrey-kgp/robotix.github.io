@@ -33,7 +33,7 @@ actions:
 
 #### USP
 
-* Lane following
+* Lane following using camera
 
 * Colour detection
 
